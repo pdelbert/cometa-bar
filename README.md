@@ -1,8 +1,18 @@
 # Cometa Bar
 
-**Pasos para ejecutar el programa**
+**Para correr el front**
 
 `npm install  && npm run dev`
+
+---
+
+**Para correr el back**
+
+`cd api`
+
+`uvicorn main:app --reload`
+
+---
 
 **Vistas**
 
@@ -14,4 +24,4 @@
 
 Estructura
 
-![1738946649109](image/README/1738946649109.png)
+![1738948120400](image/README/1738948120400.png)
