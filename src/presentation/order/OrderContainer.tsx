@@ -3,9 +3,8 @@ import OrderView from './OrderView'
 import { IStock } from '../../entities/stock';
 import stockUseCase from '../../usecase/stockUseCase';
 import { Context } from '../../context/OrderContext';
-import { Button } from '../../components';
 import statics from '../../constants';
-import Message from '../../components/Message';
+import { Message, Button } from '../../components';
 import { useNavigate } from 'react-router';
 
 const OrderContainer = () => {

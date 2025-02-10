@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import Button from './Button';
+import Button from './ui/Button';
 import { IStock } from '../entities/stock'
 import { Context } from '../context/OrderContext';
 import statics from '../constants';

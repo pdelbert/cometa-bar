@@ -12,20 +12,20 @@ const paymentRepositoryImpl = (): IPaymentRepository => ({
     
     paymentCheck: async (items: IRoundItems[]): Promise<IPayment> => {
 
-    const REQUEST_URL = `${import.meta.env.VITE_API_URL}/pay_order`;
-    const rawResponse = await fetch(REQUEST_URL, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(items)
-    });
+      const REQUEST_URL = `${import.meta.env.VITE_API_URL}/pay_order`;
+      const rawResponse = await fetch(REQUEST_URL, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(items)
+      });
 
-    const response = await rawResponse.json();
-    return response;
+      const response = await rawResponse.json();
+      return response;
 
-  }
+    }
 })
 
 export default paymentRepositoryImpl;

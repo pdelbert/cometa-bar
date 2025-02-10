@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Context } from "../../context/OrderContext";
 import { IPayment } from "../../entities/payment";
 import PaymentView from "./PaymentView";
-import Message from "../../components/Message";
+import { Message } from "../../components";
 import statics from "../../constants";
 import { useNavigate } from "react-router";
 

@@ -1,6 +1,8 @@
-import Image from "./Image";
-import Title from "./Title";
-import Button from "./Button";
+import Image from "./ui/Image";
+import Title from "./ui/Title";
+import Button from "./ui/Button";
+import Message from "./ui/Message";
+
 import ListItems from "./ListItems";
 import OrderItem from "./OrderItem";
 import CheckItems from "./CheckItems";
@@ -10,6 +12,7 @@ export {
     Title,
     Image,
     Button,
+    Message,
     ListItems,
     OrderItem,
     CheckItems,
