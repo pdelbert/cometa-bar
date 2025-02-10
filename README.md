@@ -1,12 +1,12 @@
 # Cometa Bar
 
-**Para correr el front**
+**Front**
 
 `npm install  && npm run dev`
 
 ---
 
-**Para correr el back**
+**Back**
 
 `cd api`
 
