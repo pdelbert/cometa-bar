@@ -1,26 +1,23 @@
 import { useState, useEffect } from 'react';
 import OrderView from './OrderView'
-import { IStock } from '../../entities/stock';
 import stockUseCase from '../../usecase/stockUseCase';
 import { Context } from '../../context/OrderContext';
 import statics from '../../constants';
 import { Message, Button } from '../../components';
 import { useNavigate } from 'react-router';
+import { useQuery } from '@tanstack/react-query';
 
 const OrderContainer = () => {
-    const [stock, useStock] = useState<IStock[]>([]);
+    // const [stock, useStock] = useState<IStock[]>([]);
     const [showMessage, setShowMessage] = useState<boolean>(false);
     const { roundsCreated, createRound } = Context();
     const navigate = useNavigate();
 
     // Get Stock.
-    useEffect(() => {
-        (async () => {
-            const response = await stockUseCase().getAllStocks();
-            useStock(response);
-        })()
-    }, []);
-
+    const { isLoading, data: stock } = useQuery({
+        queryKey: ['stock'],
+        queryFn: async () => await stockUseCase().getAllStocks()
+    });
 
     // Display Message after create order.
     useEffect(() => {
@@ -34,6 +31,8 @@ const OrderContainer = () => {
 
     const handlerCreateOrder = () => createRound();
     const handlerPayOrder = () => navigate("/payment");
+
+    if (isLoading) return <div>Loading...</div>
 
     return (
         <>
@@ -55,6 +54,7 @@ const OrderContainer = () => {
                     <Message message={statics.MESSAGE_CREATED_ORDER} type="success" />
                 }
             </div>
+
         </>
     )
 }

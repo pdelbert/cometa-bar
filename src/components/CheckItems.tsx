@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IPaymentItems, IRoundItems } from "../entities/payment"
 import { Context } from "../context/OrderContext";
 
@@ -8,7 +8,10 @@ interface CheckItemsProps {
 
 const CheckItems = ({ item }: CheckItemsProps) => {
     const [itemQuantity, setItemQuantity] = useState(0);
-    const { paymentListItems, addItemToPayment, removeItemToPayment } = Context();
+    const { addItemToPayment, removeItemToPayment } = Context();
+
+    useEffect(() =>
+        setItemQuantity(0), [item])
 
 
     const handleAddItem = (item: IPaymentItems) => {
@@ -24,7 +27,6 @@ const CheckItems = ({ item }: CheckItemsProps) => {
             const removeItems: IRoundItems = { name: item.name, quantity: itemQuantity - 1 }
             setItemQuantity(quantity => quantity - 1)
             removeItemToPayment(removeItems);
-            console.log(paymentListItems);
         }
     }
 

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Context } from "../../context/OrderContext";
-import { IPayment } from "../../entities/payment";
 import PaymentView from "./PaymentView";
 import { Message } from "../../components";
 import statics from "../../constants";
 import { useNavigate } from "react-router";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 interface MessageProps {
     message: string
@@ -13,17 +13,8 @@ interface MessageProps {
 
 const PaymentContainer = () => {
     const [showMessage, setShowMessage] = useState<MessageProps | undefined>(undefined);
-    const [checkData, setCheckData] = useState<IPayment | undefined>(undefined);
     const { getCheck, totalPaymentCheck, partialPaymentCheck } = Context();
-
     const navigate = useNavigate();
-
-    useEffect(() => {
-        (async () => {
-            const checkResume = await getCheck();
-            setCheckData(checkResume);
-        })()
-    }, [showMessage])
 
     // Display Message after create order.
     useEffect(() => {
@@ -32,8 +23,12 @@ const PaymentContainer = () => {
     }, [showMessage])
 
 
-    const handleTotalPayment = async () => {
+    const { data: checkData, refetch: refetchGetCheck } = useQuery({
+        queryKey: ['check'],
+        queryFn: getCheck
+    });
 
+    const handleTotalPayment = async () => {
         const response = await totalPaymentCheck();
         const message = response?.detail || statics.MEESAGE_PAYMENT_SUCCESS
         setShowMessage({ message: message, type: 'success' })
@@ -48,9 +43,8 @@ const PaymentContainer = () => {
 
         (checkData && checkData.detail === statics.NO_ITEMS)
             ? setTimeout(() => { navigate("/") }, statics.TIMER)
-            : setTimeout(() => { navigate("/payment") }, statics.TIMER);
+            : refetchGetCheck();
     }
-
 
     return (
         <>

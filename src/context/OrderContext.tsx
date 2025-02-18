@@ -96,7 +96,6 @@ const OrderProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     const totalPaymentCheck = async (): Promise<IPayment> => {
         const formatedRound: IRoundItems[] = [];
         totalOrderItems.map(elm => formatedRound.push({ name: elm.name, quantity: elm.total }));
-
         const response = await paymentUseCase().paymentCheck(formatedRound);
         return response;
     }
